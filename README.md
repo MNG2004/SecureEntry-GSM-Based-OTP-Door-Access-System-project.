@@ -239,19 +239,6 @@ After successful authentication and access approval:
 3. The door operates for the configured duration.
 4. The system returns the door to its secure state.
 
----
-```mermaid
-flowchart TD
-    A([System Start]) --> B[Initialize LPC2148]
-    B --> C[Enter Password]
-    C --> D{Password Correct?}
-    D -- Yes --> E[Generate OTP]
-    E --> F[Send OTP Through GSM]
-    F --> G[Verify OTP]
-    G --> H[Security Buffer]
-    H --> I[Open Door]
-    D -- No --> J[Update Failed Attempts]
-```
 ## 🔄 System Workflow – SecureEntry
 
 ```mermaid
