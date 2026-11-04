@@ -460,10 +460,10 @@ It provides practical learning in embedded system development, hardware interfac
 
 <div align="center">
 
-### 🔐 SecureEntry – Smart Access, Enhanced Security!
+### 🔐 SecureEntry – GSM-Based Two-Step Time-Limited Door Access System
+
 
 **LPC2148 ARM7 • Embedded C • GSM • OTP • UART • SPI • RTC • EEPROM**
 
-⭐ If you find this project useful, don't forget to give this repository a star!
 
 </div>
