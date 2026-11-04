@@ -244,9 +244,43 @@ After successful authentication and access approval:
 ## 🔄 System Workflow
 
 
-**Important:** The diagram is rendered automatically by GitHub when you push the updated README. You don't need to upload a separate image.
 
-You can preview it before uploading using [Mermaid Live Editor](https://mermaid.live/).
+## 🔄 System Workflow – SecureEntry
+
+```mermaid
+flowchart TD
+    A(["🚀 System Start"]) --> B["Initialize LPC2148 Peripherals"]
+    B --> C["Initialize GSM Module"]
+    C --> D["Enter User Password"]
+
+    D --> E{"Password Correct?"}
+
+    E -- No --> F["Update Failed Attempt Count"]
+    F --> G{"Maximum Attempts Reached?"}
+    G -- Yes --> H["Temporarily Block User"]
+    G -- No --> D
+    H --> D
+
+    E -- Yes --> I["Generate 6-Digit OTP"]
+    I --> J["Send OTP Through GSM"]
+    J --> K["Enter OTP Using Keypad"]
+
+    K --> L{"OTP Correct and Within 60 Seconds?"}
+
+    L -- No --> M["Reject Authentication"]
+    L -- Yes --> N["Start Security Buffer"]
+
+    N --> O["Check Authorised SMS Commands"]
+    O --> P{"Access Approved?"}
+
+    P -- No --> Q["Keep Door Locked"]
+    P -- Yes --> R["Activate Motor Driver"]
+
+    R --> S["Open Door"]
+    S --> T["Close Door"]
+    T --> U(["System Ready"])
+```
+
 
 ## 🧭 Program Execution Flow
 
