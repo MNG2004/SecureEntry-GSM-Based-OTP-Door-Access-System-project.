@@ -240,11 +240,18 @@ After successful authentication and access approval:
 4. The system returns the door to its secure state.
 
 ---
-
-## 🔄 System Workflow
-
-
-
+```mermaid
+flowchart TD
+    A([System Start]) --> B[Initialize LPC2148]
+    B --> C[Enter Password]
+    C --> D{Password Correct?}
+    D -- Yes --> E[Generate OTP]
+    E --> F[Send OTP Through GSM]
+    F --> G[Verify OTP]
+    G --> H[Security Buffer]
+    H --> I[Open Door]
+    D -- No --> J[Update Failed Attempts]
+```
 ## 🔄 System Workflow – SecureEntry
 
 ```mermaid
@@ -298,51 +305,32 @@ flowchart TD
 12. 🚪 **Door Control:** Operate the door after successful access approval.
 13. 🔄 **System Monitoring:** Continue the application workflow.
 
-## 🧱 System Architecture
+## 🏗️ System Architecture
 
+```mermaid
+flowchart TD
+    A([USER]) --> B[4x4 MATRIX KEYPAD]
 
-                 USER
-                  |
-                  v
-          4x4 MATRIX KEYPAD
-                  |
-                  v
-          +----------------+
-          |                |
-          |    LPC2148     |
-          |    ARM7 MCU    |
-          |                |
-          +----------------+
-             |    |    |
-      +------+    |    +--------+
-      |           |             |
-      v           v             v
-     LCD         GSM          RTC
-                  |
-                  v
-            REGISTERED PHONE
-                  |
-                  v
-             SMS / OTP
+    B --> C
 
-             LPC2148
-                |
-                v
-          SPI EEPROM
-                |
-                v
-          USER DATA STORAGE
+    subgraph MCU["LPC2148 – ARM7 Microcontroller"]
+        C["LPC2148 ARM7 MCU"]
+    end
 
-             LPC2148
-                |
-                v
-           MOTOR DRIVER
-                |
-                v
-             DC MOTOR
-                |
-                v
-           DOOR CONTROL
+    C --> D[LCD Display]
+    C --> E[GSM Module]
+    C --> F[RTC Module]
+    C --> G[SPI EEPROM]
+    C --> H[Motor Driver]
+
+    E --> I[Registered Mobile Phone]
+    I --> J[SMS / OTP Communication]
+
+    G --> K[User Data Storage]
+
+    H --> L[DC Motor]
+    L --> M[Door Control]
+```
 
 ## 🛠️ Software and Development Tools
 
