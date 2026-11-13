@@ -240,11 +240,6 @@ After successful authentication and access approval:
 4. The system returns the door to its secure state.
 
 ## 🔄 System Workflow – SecureEntry
-
-## Project Working
-
-![Project Image]( mermaid-diagram.png)
-
 ```mermaid
 flowchart TD
     A(["🚀 System Start"]) --> B["Initialize LPC2148 Peripherals"]
